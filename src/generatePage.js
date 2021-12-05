@@ -18,7 +18,8 @@ const generateEmployees = teamArray => {
                     ID: ${id}
                 </div>
                 <div id="email">
-                    <a href="${email}">${email}</a>
+                    Email:
+                    <a href="mailto:${email}" target="_blank"> ${email}</a>
                 </div>
                 <div id="special">
                     Office Number: ${office}
@@ -47,10 +48,12 @@ const generateEmployees = teamArray => {
                     ID: ${id}
                 </div>
                 <div id="email">
-                    <a href="${email}">${email}</a>
+                    Email:
+                    <a href="mailto:${email}" target="_blank"> ${email}</a>
                 </div>
                 <div id="special">
-                    Github Username: ${github}
+                    Github Username:
+                    <a href="https://github.com/${github}" target="_blank"> ${github}</a>
                 </div>
             </div>
         </div>
@@ -76,7 +79,8 @@ const generateEmployees = teamArray => {
                     ID: ${id}
                 </div>
                 <div id="email">
-                    <a href="${email}">${email}</a>
+                    Email:
+                    <a href="mailto:${email}" target="_blank"> ${email}</a>
                 </div>
                 <div id="special">
                     School: ${school}
