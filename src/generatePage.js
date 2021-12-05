@@ -1,57 +1,96 @@
-const generateEmployees = employeeData => {
+const generateEmployees = teamArray => {
     return `
-    <div id="card">
-        <div id="head">
-            <div id="name">
-                ${employeeData.name}
+    ${teamArray
+    .filter(({role}) => role === 'manager')
+    .map(({name, id, email, office, role}) => {
+    return `
+        <div id="card">
+            <div id="head">
+                <div id="name">
+                    ${name}
+                </div>
+                <div id="role">
+                    ${role}
+                </div>
             </div>
-            <div id="role">
-                ${employeeData.role}
-            </div>
-        </div>
-        <div id="info">
-            <div id="idNum">
-                ID: ${employeeData.id}
-            </div>
-            <div id="email">
-                <a src="${employeeData.email}">${employeeData.email}</a>
-            </div>
-            <div id="special">
-            ${employeeData.members
-            .filter(({Manager}) => Manager)
-            .map(({name, id, email, office}) => {
-                return `
+            <div id="info">
+                <div id="idNum">
+                    ID: ${id}
+                </div>
+                <div id="email">
+                    <a href="${email}">${email}</a>
+                </div>
+                <div id="special">
                     Office Number: ${office}
-                `;
-            })
-            .join('')}
-
-        ${employeeData.members
-            .filter(({Engineer}) => Engineer)
-            .map(({name, id, email, github}) => {
-                return `
-                    Github User: ${github}
-                `;
-            })
-            .join('')}
-
-        ${employeeData.members
-            .filter(({Intern}) => Intern)
-            .map(({name, id, email, school}) => {
-                return `
-                    School: ${school}
-                `;
-            })
-            .join('')}
-        
-            
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-    `
+        `;
+    })
+    .join('')}
+
+    ${teamArray
+    .filter(({role}) => role === 'engineer')
+    .map(({name, id, email, github, role}) => {
+    return `
+        <div id="card">
+            <div id="head">
+                <div id="name">
+                    ${name}
+                </div>
+                <div id="role">
+                    ${role}
+                </div>
+            </div>
+            <div id="info">
+                <div id="idNum">
+                    ID: ${id}
+                </div>
+                <div id="email">
+                    <a href="${email}">${email}</a>
+                </div>
+                <div id="special">
+                    Github Username: ${github}
+                </div>
+            </div>
+        </div>
+        `;
+    })
+    .join('')}
+
+    ${teamArray
+    .filter(({role}) => role === 'intern')
+    .map(({name, id, email, school, role}) => {
+    return `
+        <div id="card">
+            <div id="head">
+                <div id="name">
+                    ${name}
+                </div>
+                <div id="role">
+                    ${role}
+                </div>
+            </div>
+            <div id="info">
+                <div id="idNum">
+                    ID: ${id}
+                </div>
+                <div id="email">
+                    <a href="${email}">${email}</a>
+                </div>
+                <div id="special">
+                    School: ${school}
+                </div>
+            </div>
+        </div>
+        `;
+    })
+    .join('')}
+     `   
 }
 
 module.exports = templateData => {
+    const {members} = templateData;
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -66,10 +105,10 @@ module.exports = templateData => {
     </head>
     <body>
     <header>
-        <h1>My Team</h1>
+    <h1>My Team</h1>
     </header>
     <main id="main">
-    ${generateEmployees(templateData)}
+    ${generateEmployees(members)}
     </main>
     </body>
     </html>

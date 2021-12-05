@@ -5,16 +5,15 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const Employee = require('./lib/Employee');
-const generatePage = require('./src/generatePage.js');
-const {writeFile, copyFile} = require('./utils/generate-site.js');
+//const Employee = require('./lib/Employee');
+const generatePage = require('./src/generatePage');
+const {writeFile, copyFile} = require('./utils/generate-site');
 
 function Team() {
     this.members = [];
 
-
     Team.prototype.createManager = function() {
-        inquirer.prompt([
+        return inquirer.prompt([
                 {
                     type: 'input',
                     name: 'name',
@@ -70,12 +69,12 @@ function Team() {
             ])
             .then(data => {
                 this.members.push(new Manager(data.name, data.id, data.email, data.office));
-                this.createEmployee();
+                return this.createEmployee();
             })
     };
 
     Team.prototype.createEngineer = function() {
-        inquirer.prompt([
+        return inquirer.prompt([
                 {
                     type: 'input',
                     name: 'name',
@@ -131,12 +130,12 @@ function Team() {
             ])
             .then(data => {
                 this.members.push(new Engineer(data.name, data.id, data.email, data.github));
-                this.createEmployee();
+                return this.createEmployee();
             })
     }
 
     Team.prototype.createIntern = function() {
-        inquirer.prompt([
+        return inquirer.prompt([
                 {
                     type: 'input',
                     name: 'name',
@@ -192,12 +191,12 @@ function Team() {
             ])
             .then(data => {
                 this.members.push(new Intern(data.name, data.id, data.email, data.school));
-                this.createEmployee();
+                return this.createEmployee();
             })
     }
 
     Team.prototype.createEmployee = function() {
-        inquirer.prompt([
+        return inquirer.prompt([
             {
                 type: 'confirm',
                 name: 'addNew',
@@ -218,10 +217,10 @@ function Team() {
                 .then(type => {
                     switch (type.role) {
                         case 'engineer':
-                            this.createEngineer();
+                            return this.createEngineer();
                             break;
                         case 'intern':
-                            this.createIntern();
+                            return this.createIntern();
                             break;
                         default:
                             console.log('No selection');
@@ -230,33 +229,42 @@ function Team() {
                 })
             } else {
                 console.log(this);
-                generatePage(this)
-                    // .then(data => {
-                    //     writeFile(data);
-                    // })
-                    // .then(response => {
-                    //     copyFile();
-                    // })
-                    // .then(err => {
-                    //     console.log(err);
-                    // })
+                return this;
             }
         })
     }
-}
+};
 
-new Team().createManager();
+function createTeam() {
+    return new Team().createManager();
+};
 
-
-    // .then(team => {
-    //     return generatePage(team);
+//createTeam()
+new Team().createManager()
+    .then(teamobj => {
+        return generatePage(teamobj);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .then(err => {
+        console.log(err);
+    })
+    //  .then(team => {
+    //      console.log(team);
     // })
-    // .then(pageHTML => {
-    //     return writeFile(pageHTML);
+    // generatePage(this);
+    // .then(data => {
+    //     writeFile(data);
     // })
-    // .then(writeFileResponse => {
-    //     return copyFile();
+    // .then(response => {
+    //     copyFile();
     // })
     // .then(err => {
     //     console.log(err);
     // })
+
