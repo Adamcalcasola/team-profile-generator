@@ -1,17 +1,16 @@
 const inquirer = require('inquirer');
-// const router = require('express').Router();
-// const path = require('path');
-// const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-//const Employee = require('./lib/Employee');
 const generatePage = require('./src/generatePage');
 const {writeFile, copyFile} = require('./utils/generate-site');
 
 function Team() {
     this.members = [];
-
+    console.log(`Welcome to the Team Profile Generator. 
+Provide the requested information after each prompt.
+====================================================
+`)
     Team.prototype.createManager = function() {
         return inquirer.prompt([
                 {
@@ -211,15 +210,15 @@ function Team() {
                         type: 'list',
                         name: 'role',
                         message: 'What role are you assigning?',
-                        choices: ['engineer', 'intern']
+                        choices: ['Engineer', 'Intern']
                     },
                 ])
                 .then(type => {
                     switch (type.role) {
-                        case 'engineer':
+                        case 'Engineer':
                             return this.createEngineer();
                             break;
-                        case 'intern':
+                        case 'Intern':
                             return this.createIntern();
                             break;
                         default:
@@ -228,18 +227,15 @@ function Team() {
                     } 
                 })
             } else {
-                console.log(this);
+                console.log(`
+
+Your team has been created! You can access the HTML file in the dist folder.`);
                 return this;
             }
         })
     }
 };
 
-function createTeam() {
-    return new Team().createManager();
-};
-
-//createTeam()
 new Team().createManager()
     .then(teamobj => {
         return generatePage(teamobj);
@@ -254,17 +250,3 @@ new Team().createManager()
     .then(err => {
         console.log(err);
     })
-    //  .then(team => {
-    //      console.log(team);
-    // })
-    // generatePage(this);
-    // .then(data => {
-    //     writeFile(data);
-    // })
-    // .then(response => {
-    //     copyFile();
-    // })
-    // .then(err => {
-    //     console.log(err);
-    // })
-

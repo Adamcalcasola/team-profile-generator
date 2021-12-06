@@ -1,7 +1,7 @@
 const generateEmployees = teamArray => {
     return `
     ${teamArray
-    .filter(({role}) => role === 'manager')
+    .filter(({role}) => role === 'Manager')
     .map(({name, id, email, office, role}) => {
     return `
         <div id="card">
@@ -10,18 +10,18 @@ const generateEmployees = teamArray => {
                     ${name}
                 </div>
                 <div id="role">
-                    ${role}
+                    <i class="fas fa-mug-hot"></i> ${role}
                 </div>
             </div>
             <div id="info">
-                <div id="idNum">
+                <div id="idNum" class="infobox">
                     ID: ${id}
                 </div>
-                <div id="email">
+                <div id="email" class="infobox">
                     Email:
                     <a href="mailto:${email}" target="_blank"> ${email}</a>
                 </div>
-                <div id="special">
+                <div id="special" class="infobox">
                     Office Number: ${office}
                 </div>
             </div>
@@ -31,7 +31,7 @@ const generateEmployees = teamArray => {
     .join('')}
 
     ${teamArray
-    .filter(({role}) => role === 'engineer')
+    .filter(({role}) => role === 'Engineer')
     .map(({name, id, email, github, role}) => {
     return `
         <div id="card">
@@ -40,19 +40,19 @@ const generateEmployees = teamArray => {
                     ${name}
                 </div>
                 <div id="role">
-                    ${role}
+                    <i class="fas fa-glasses"></i> ${role}
                 </div>
             </div>
             <div id="info">
-                <div id="idNum">
-                    ID: ${id}
+                <div id="idNum" class="infobox">
+                ID: ${id}
                 </div>
-                <div id="email">
+                <div id="email" class="infobox">
                     Email:
                     <a href="mailto:${email}" target="_blank"> ${email}</a>
                 </div>
-                <div id="special">
-                    Github Username:
+                <div id="special" class="infobox">
+                    Github:
                     <a href="https://github.com/${github}" target="_blank"> ${github}</a>
                 </div>
             </div>
@@ -62,7 +62,7 @@ const generateEmployees = teamArray => {
     .join('')}
 
     ${teamArray
-    .filter(({role}) => role === 'intern')
+    .filter(({role}) => role === 'Intern')
     .map(({name, id, email, school, role}) => {
     return `
         <div id="card">
@@ -71,18 +71,18 @@ const generateEmployees = teamArray => {
                     ${name}
                 </div>
                 <div id="role">
-                    ${role}
+                    <i class="fas fa-user-graduate"></i> ${role}
                 </div>
             </div>
             <div id="info">
-                <div id="idNum">
+                <div id="idNum" class="infobox">
                     ID: ${id}
                 </div>
-                <div id="email">
+                <div id="email" class="infobox">
                     Email:
                     <a href="mailto:${email}" target="_blank"> ${email}</a>
                 </div>
-                <div id="special">
+                <div id="special" class="infobox">
                     School: ${school}
                 </div>
             </div>
