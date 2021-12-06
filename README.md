@@ -20,7 +20,7 @@
   When the program ends, an HTML file and a CSS style sheet will be generated and saved to the dist folder. If the user opens the HTML file in the browser, their team will be desplayed by a series of cards with the information provided. The emails and Github account will link to send an email or bring the user to the Github page when click on them.
 
   link for tutorial that demonstrates how to use the application:
-  https://watch.screencastify.com/
+  https://watch.screencastify.com/v/vDlWanl6ATFL6KVU7ezs
 
   there is also an MP4 file saved in the media folder in the Github repo under the name tutorial.mp4
 
